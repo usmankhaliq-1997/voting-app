@@ -9,6 +9,11 @@ module.exports = {
     ],
 
     theme: {
+       
+        maxWidth:{
+            custom:'62.5rem'
+        },
+        
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
