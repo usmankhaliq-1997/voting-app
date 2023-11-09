@@ -31,7 +31,7 @@
     <div class="ideas-container space-y-6 my-6">
         <div
             class="idea-container hover:shadow-card cursor-pointer hover:transition duration-150 ease-in bg-white rounded-xl flex">
-            <div class="border border-gray-500 px-5 py-8">
+            <div class="border-r border-gray-100 px-5 py-8">
                 <div class="text-center">
                     <div class="font-semibold text-2xl">
                         12
