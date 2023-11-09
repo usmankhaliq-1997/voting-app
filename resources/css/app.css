@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* vetical lines */
+.comments-container::before{
+    position: absolute;
+    display: block;
+    top:0;
+    left: -40px;
+    content: "";
+    width: 3px;
+    height: 100%;
+    background: lightgray;
+}
+
+/* horizontal lines */
+.comment-container::before{
+    position: absolute;
+    display: block;
+    top:57px;
+    content: "";
+    width: 23px;
+    height: 3px;
+    left: -40px;
+    background: lightgray;
+}
+
+/* cutoff last child vertical */
+.comment-container:last-child::after{
+    position: absolute;
+    display: block;
+    top:60px;
+    content: "";
+    width: 3px;
+    height: calc(100% - 60px);
+    left: -40px;
+    background:     #f7f8fc;
+}
+
+
+.is-admin::before{
+    width: 38px;
+    height: 38px;
+    border-radius: 38px;
+    border:7px solid white;
+    box-shadow: 4px 4px 15px 0(rgba(36, 37, 38, 0.08));
+    left: -58px;
+    background: purple;
+    opacity: 1;
+}
