@@ -17,8 +17,8 @@
 </head>
 
 <body class="font-sans antialiased bg-[#f7f8fc] text-sm">
-    <header class="flex items-center justify-between px-8 py-4">
-        <a href="#" class="logo"><img alt="logo" src="{{ asset('img/logo.svg') }}"></a>
+    <header class="flex flex-col md:flex-row space-y-2 md:space-y-0  items-center justify-between px-2 md:px-8 py-4">
+        <a href="#" class="logo "><img alt="logo" src="{{ asset('img/logo.svg') }}"></a>
 
         <div class="flex items-center">
             @if (Route::has('login'))
@@ -48,9 +48,9 @@
             </a>
         </div>
     </header>
-    <main class="container mx-auto flex max-w-custom ">
-        <div class="w-[17.5rem] mr-4">
-            <div class=" bg-white border-2 border-blue-300 rounded-xl mt-16">
+    <main class="container mx-auto flex flex-col md:flex-row  max-w-custom ">
+        <div class="w-[17.5rem] md:mr-4 mx-auto md:mx-0 ">
+            <div class=" bg-white border-2 md:sticky md:top-8 border-blue-300 rounded-xl mt-16">
                 <div class="text-center px-6 py-2 pt-6">
                     <h3 class="font-semibold text-base">Add an Idea</h3>
                     <p class="text-xs mt-4">Let us know what you would like to</p>
@@ -89,10 +89,10 @@
                 </form>
             </div>
         </div>
-        <div class="w-[43.5rem]">
-            <nav class="flex items-center justify-between text-sm ">
-                <ul class="flex uppercase font-semibold border-b-4 border-gray-300 pb-3 space-x-10">
-                    <li><a href="#" class="border-b-4 pb-3 border-blue-200">All Ideas(187)</a></li>
+        <div class="w-full px-2 md:px-0 md:w-[43.5rem]">
+            <nav class="hidden md:flex items-center justify-between text-sm ">
+                <ul class="flex uppercase font-semibold border-b-4 border-gray-300 pb-2.5 space-x-10">
+                    <li><a href="#" class="border-b-4 pb-3 border-blue-400">All Ideas(187)</a></li>
                     <li><a href="#"
                             class="text-gray-400   pb-3 hover:border-b-4 border-blue-400 hover:transition duration-150 ease-in">Considering(6)</a>
                     </li>
@@ -101,7 +101,7 @@
                     </li>
 
                 </ul>
-                <ul class="flex uppercase font-semibold border-b-4 border-gray-300 pb-3 space-x-10">
+                <ul class="flex uppercase font-semibold border-b-4 border-gray-300 pb-2.5 space-x-10">
                     <li><a href="#" class="border-b-4 pb-3 border-blue-400">Implmented(10)</a></li>
                     <li><a href="#"
                             class="text-gray-400   pb-3 hover:border-b-4 border-blue-400 hover:transition duration-150 ease-in">Closed(55)</a>

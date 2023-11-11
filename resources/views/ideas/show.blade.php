@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="">
-        <a href="/" class="flex items-center font-semibold hover:underline">
+        <a href="{{ route('idea.index') }}" class="flex items-center font-semibold hover:underline">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                 class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -11,86 +11,91 @@
     </div>
     <div class="idea-container  bg-white rounded-xl flex mt-4">
 
-        <div class="flex flex-1 px-2 py-6">
-            <div class="flex-none"> <a href="#"><img alt="avatar" class="w-14 h-14 rounded-xl"
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 flex-1 px-2 py-6">
+            <div class="flex-none mx-4 md:mx-0"> <a href="#"><img alt="avatar" class="w-14 h-14 rounded-xl"
                         src="https://source.unsplash.com/200x200/?face&crop=face&v=1"></a>
             </div>
-            <div class="mx-4 ">
+            <div class="mx-4 flex flex-col justify-between">
                 <h4 class="text-xl font-semibold">
-                    <a href="#" class="hover:underline">A Random Title Can Go Here</a>
-                    <div class="text-gray-600 mt-3 text-xxs line-clamp-3">Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit. Adipisci accusantium non numquam laudantium? Quasi quae aut amet, quo
-                        doloremque hic quis ipsum consectetur impedit quaerat, debitis, inventore est? Natus rem
-                        odio quae ipsa voluptates hic perspiciatis expedita id alias, accusantium aliquam quis sed
-                        beatae quos in. Deserunt, consequuntur quo. Recusandae maxime eveniet hic, ratione quia quos
-                        explicabo nisi dicta ipsam exercitationem repellendus veniam praesentium error modi
-                        doloribus autem commodi fuga fugiat porro voluptas. Nemo quos asperiores ipsum, tenetur
-                        itaque soluta molestias dolores harum qui praesentium quisquam, saepe ex ab earum
-                        consequuntur vel doloremque pariatur accusamus? Facere nobis quibusdam minus veniam!</div>
-                    <div class="flex items-center justify-between mt-6">
-                        <div class="flex items-center justify-between text-sm font-semibold space-x-2 text-gray-400">
-                            <div class="font-bold text-gray-900">John Doe</div>
-                            <div class="">&bull;</div>
-                            <div class="">10 hours ago</div>
-                            <div class="">&bull;</div>
-                            <div class="">Catogory 1</div>
-                            <div class="">&bull;</div>
-                            <div class="">3 Comments</div>
-                            <div class="">&bull;</div>
-                        </div>
-                        <div class="flex items-center justify-center space-x-2">
-                            <div
-                                class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
-                                Open</div>
-                            <button
-                                class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 hover:transition duration-150 ease-in px-4">
-                                <svg fill="currentColor" width="24" height="6">
-                                    <path
-                                        d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
-                                        style="color: rgba(163, 163, 163, .5)">
-                                </svg>
-                                <ul
-                                    class="absolute w-44 font-semibold bg-white ml-8 shadow-dialog rounded-xl py-3 text-left  text-base">
-                                    <li><a href="#"
-                                            class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Mark
-                                            as Spam</a></li>
-                                    <li><a href="#"
-                                            class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Delete
-                                            Post</a></li>
-                                </ul>
-                            </button>
-                        </div>
-                    </div>
+                    <a href="#" class="hover:underline">{{ $idea->title }}</a>
                 </h4>
+                <div class="text-gray-600 mt-3 text-sm line-clamp-3">{{ $idea->description }}</div>
+                <div class="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:items-center  justify-between mt-6">
+                    <div class="flex items-center justify-between text-xxs font-semibold space-x-2 text-gray-400">
+                        <div class="hidden md:block font-bold text-gray-900">{{ $idea->user->name }}</div>
+                        <div class="hidden md:block">&bull;</div>
+                        <div class="">{{ $idea->created_at->diffForHumans() }}</div>
+                        <div class="">&bull;</div>
+                        <div class="">Catogory 1</div>
+                        <div class="">&bull;</div>
+                        <div class="">3 Comments</div>
+                        
+                    </div>
+                    <div x-data="{open:false}" class="flex items-center justify-center space-x-2">
+                        <div
+                            class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
+                            Open</div>
+                        <button @click="open=!open"
+                            class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 hover:transition duration-150 ease-in px-4">
+                            <svg fill="currentColor" width="24" height="6">
+                                <path
+                                    d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
+                                    style="color: rgba(163, 163, 163, .5)">
+                            </svg>
+                            <ul x-cloak x-show.transition.origin.top.left="open" @click.away="open=false"
+                                @keydown.escape.window="open=false"
+                                class="absolute w-44 z-10 font-semibold bg-white ml-8 shadow-dialog rounded-xl py-3 text-left  text-base top-[1.8rem] md:ml-8 md:top-6 right-0 md:left-0  ">
+                                <li><a href="#"
+                                        class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Mark
+                                        as Spam</a></li>
+                                <li><a href="#"
+                                        class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Delete
+                                        Post</a></li>
+                            </ul>
+                        </button>
+                    </div>
+                    <div class="flex itmes-center md:hidden mt-4 ">
+                        <div class="bg-gray-100 text-center rounded-xl h-10 px-4 py-2 pr-8">
+                            <div class="text-sm font-bold leading-none">12</div>
+                            <div class="text-xxs font-semibold leading-none text-gray-400 uppercase">votes</div>
+                        </div>
+                        <button
+                            class="-mx-5 w-20 border border-gray-200 bg-gray-200 font-bold text-xxs uppercase rounded-xl px-4 py-3 hover:border-gray-400 hover:transition duration-150 ease-in ">Vote
+
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </div>
-    <div class="buttons-container flex justify-between mt-6">
+    <div class="buttons-container flex  justify-between mt-6">
 
-        <div class="flex items-center space-x-2 ml-4">
-            <div class="relative">
-                <button type="submit"
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 items-center md:space-x-2 md:ml-4">
+            <div class="relative" x-data="{open:false}">
+                <button @click="open=!open" type="submit"
                     class="flex items-center justify-center w-32 h-11 text-sm bg-blue-600 text-white font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
 
                     Reply
                 </button>
-                <div
-                    class=" absolute z-10 w-[26rem] text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2 px-4">
+                <div x-cloak x-show.transition.origin.top.left="open" @click.away="open=false"
+                    @keydown.escape.window="open=false"
+                    class=" absolute z-10 w-64 md:w-[26rem] text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2 px-4">
                     <form action="#" class="space-y-4 px-4 py-6">
                         <div class="">
                             <textarea name="post_comment" id="post_comment" cols="30" rows="4"
                                 class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2"
                                 placeholder="Go head,dont be shy.Share your thoughts...."></textarea>
                         </div>
-                        <div class="flex items-center space-x-3">
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 items-center md:space-x-3">
                             <button type="submit"
-                                class="flex items-center justify-center w-1/2 h-11 text-sm bg-blue-600 text-white font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
+                                class="flex items-center justify-center w-full md:w-1/2 h-11 text-sm bg-blue-600 text-white font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
 
                                 Post Comment
                             </button>
                             <button type="button"
-                                class="flex items-center justify-center w-32 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
+                                class="flex items-center justify-center w-full md:w-32 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
                                 <svg class="w-4 text-gray-600 transform -rotate-45" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -103,8 +108,8 @@
                     </form>
                 </div>
             </div>
-            <div class="relative">
-                <button type="button"
+            <div x-data="{open:false}" class="relative">
+                <button @click="open=!open" type="button"
                     class="flex items-center justify-center w-34 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 hover:transition duration-150 ease-in px-6 py-3">
 
 
@@ -115,11 +120,12 @@
                     </svg>
 
                 </button>
-                <div
-                    class=" absolute z-20 w-[19rem] text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2 px-4">
+                <div x-cloak x-show.transition.origin.top.left="open" @click.away="open=false"
+                    @keydown.escape.window="open=false"
+                    class="absolute z-20 w-64 md:w-[19rem] text-left font-semibold text-sm bg-white shadow-dialog rounded-xl mt-2 px-4">
                     <form action="#" class="space-y-4 px-4 py-6">
-                        <div class="space-y-4">
-                            <div class="flex items-center mb-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center ">
                                 <input id="default-radio-1" type="radio" value="" name="default-radio"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-none focus:ring-blue-500   focus:ring-2 ">
                                 <label for="default-radio-1"
@@ -179,7 +185,7 @@
             </div>
         </div>
 
-        <div class="flex itmes-center space-x-3">
+        <div class="hidden  md:flex itmes-center space-x-3">
             <div class="bg-white font-semibold text-center rounded-xl px-3 py-2">
                 <div class="text-xl leading-snug">12</div>
                 <div class="text-gray-400 text-xs leading-none">Votes</div>
@@ -192,14 +198,14 @@
         </div>
     </div>
 
-    <div class="comments-container relative  space-y-6 ml-20 my-8">
+    <div class="comments-container relative  space-y-6 md:ml-20 my-8">
         <div class="comment-container relative  bg-white rounded-xl flex mt-4">
 
-            <div class="flex flex-1 px-2 py-6">
+            <div class="flex flex-col md:flex-row  flex-1 px-2 py-6">
                 <div class="flex-none"> <a href="#"><img alt="avatar" class="w-14 h-14 rounded-xl"
                             src="https://source.unsplash.com/200x200/?face&crop=face&v=2"></a>
                 </div>
-                <div class="mx-4 ">
+                <div class=" md:mx-4 ">
                     <h4 class="text-xl font-semibold">
 
                         <div class="text-gray-600 mt-3 text-xxs line-clamp-3">Lorem ipsum dolor, sit amet consectetur
@@ -219,17 +225,18 @@
                                 <div class="">10 hours ago</div>
 
                             </div>
-                            <div class="flex items-center justify-center space-x-2">
+                            <div x-data="{open:false}" class="flex items-center justify-center space-x-2">
 
-                                <button
+                                <button @click="open=!open"
                                     class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 hover:transition duration-150 ease-in px-4">
                                     <svg fill="currentColor" width="24" height="6">
                                         <path
                                             d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
                                             style="color: rgba(163, 163, 163, .5)">
                                     </svg>
-                                    <ul
-                                        class="hidden absolute w-44 font-semibold bg-white ml-8 shadow-dialog rounded-xl py-3 text-left  text-base">
+                                    <ul x-cloak x-show.transition.origin.top.left="open" @click.away="open=false"
+                                        @keydown.escape.window="open=false"
+                                        class="z-10 absolute w-44 font-semibold bg-white ml-8 shadow-dialog rounded-xl py-3 text-left  text-base top-[1.8rem] md:ml-8 md:top-6 right-0 md:left-0">
                                         <li><a href="#"
                                                 class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Mark
                                                 as Spam</a></li>
@@ -247,12 +254,12 @@
         </div>
         <div class="comment-container is-admin border border-blue-600 relative  bg-white rounded-xl flex mt-4">
 
-            <div class="flex flex-1 px-2 py-6">
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 flex-1 px-2 py-6">
                 <div class="flex-none">
                     <a href="#"><img alt="avatar" class="w-14 h-14 rounded-xl"
                             src="https://source.unsplash.com/200x200/?face&crop=face&v=3">
                     </a>
-                    <div class="text-blue-600 uppercase text-center mt-2 text-xxs font-bold">ADMIN</div>
+                    <div class="hidden md:block text-blue-600 uppercase text-center mt-2 text-xxs font-bold">ADMIN</div>
                 </div>
                 <div class="mx-4 ">
                     <div class="text-xl font-semibold">
@@ -306,7 +313,7 @@
 
         <div class="comment-container relative  bg-white rounded-xl flex mt-4">
 
-            <div class="flex flex-1 px-2 py-6">
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 flex-1 px-2 py-6">
                 <div class="flex-none"> <a href="#"><img alt="avatar" class="w-14 h-14 rounded-xl"
                             src="https://source.unsplash.com/200x200/?face&crop=face&v=4"></a>
                 </div>
