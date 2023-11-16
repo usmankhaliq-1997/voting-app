@@ -6,13 +6,11 @@ module.exports = {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './tailwind-databaseClasses.html',
     ],
 
     theme: {
        
-        maxWidth:{
-            custom:'68.5rem'
-        },
         boxShadow: {
             card: '4px 4px 15px 0 rgba(36, 37, 38, 0.08)',
             dialog: '3px 4px 15px 0 rgba(36, 37, 38, 0.22)',

@@ -18,8 +18,10 @@ class IdeaFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'title' => $this->faker->words(4,true),
+            'user_id' => $this->faker->numberBetween(1,20),
+            'catagory_id' => rand(1,4),
+            'status_id' => rand(1,5),
+            'title' => $this->faker->words(4, true),
             'description' => $this->faker->paragraph(5),
         ];
     }

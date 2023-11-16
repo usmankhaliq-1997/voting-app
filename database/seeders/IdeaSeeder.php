@@ -15,18 +15,7 @@ class IdeaSeeder extends Seeder
      */
     public function run()
     {
-        Idea::factory(30)->create();
-
-        Idea::create([
-            'user_id' => 2,
-            'title' => 'My First Idea For Testing',
-            'description' => 'Description for first Idea for testing',
-        ]);
-
-        Idea::create([
-            'user_id' => 2,
-            'title' => 'My First Idea For Testing',
-            'description' => 'Description for first Idea for testing putting same title',
-        ]);
+        Idea::factory(100)->create();
     }
+
 }
