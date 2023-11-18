@@ -18,20 +18,7 @@ class IdeaController extends Controller
     public function index()
     {
 
-        $statuses = Status::all()->pluck('id','name');
-
-        return view('ideas.index', ['ideas' => Idea::with('user', 'catagory', 'status')
-            ->when(request()->status && request()->status!=='All', function($query) use ($statuses){
-                return $query->where('status_id',$statuses->get(request()->status));
-            })
-            ->addSelect([
-                'voted_by_user' => Vote::select('id')
-                    ->where('user_id', auth()->id())
-                    ->whereColumn('idea_id', 'ideas.id')
-            ])
-            ->withCount('votes')
-            ->orderBy('id', 'desc')
-            ->simplePaginate(10)]);
+        return view('ideas.index');
     }
 
     /**

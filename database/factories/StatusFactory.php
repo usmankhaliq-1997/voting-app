@@ -17,7 +17,7 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'classes' => 'bg-gray-500'
         ];
     }
 }
