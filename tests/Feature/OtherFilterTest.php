@@ -401,8 +401,8 @@ class OtherFilterTest extends TestCase
             ->set('filter', 'My Ideas')
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() == 2
-                && $ideas->first()->title == "My Third Idea"
-                && $ideas->get(1)->title == "My First Idea";
+                    && $ideas->first()->title == "My Third Idea"
+                    && $ideas->get(1)->title == "My First Idea";
             });
     }
 }

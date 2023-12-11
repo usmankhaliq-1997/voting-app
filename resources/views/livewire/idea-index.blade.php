@@ -50,24 +50,7 @@
                     <button
                         class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
                         {{ $idea->status->name }}</button>
-                    <button @click="open=!open"
-                        class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 hover:transition duration-150 ease-in px-4">
-                        <svg fill="currentColor" width="24" height="6">
-                            <path
-                                d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
-                                style="color: rgba(163, 163, 163, .5)">
-                        </svg>
-                        <ul x-cloak x-show.transition.origin.top.left="open" @click.away="open=false"
-                            @keydown.escape.window="open=false"
-                            class="absolute w-44 font-semibold bg-white ml-8 shadow-dialog rounded-xl py-3 top-[1.8rem] md:ml-8 md:top-6 right-0 md:left-0 text-left  text-base ">
-                            <li><a href="#"
-                                    class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Mark
-                                    as Spam</a></li>
-                            <li><a href="#"
-                                    class="hover:bg-gray-100 block px-5 py-3 hover:transition duration-150 ease-in">Delete
-                                    Post</a></li>
-                        </ul>
-                    </button>
+                   
                 </div>
                 <div class="flex itmes-center md:hidden mt-4 ">
                     <div class="bg-gray-100 text-center rounded-xl h-10 px-4 py-2 pr-8">

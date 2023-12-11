@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Catagory;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +20,9 @@ class IdeaFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1,20),
-            'catagory_id' => rand(1,4),
-            'status_id' => rand(1,5),
+            'user_id' => User::factory(),
+            'catagory_id' =>Catagory::factory(),
+            'status_id' => Status::factory(),
             'title' => $this->faker->words(4, true),
             'description' => $this->faker->paragraph(5),
         ];

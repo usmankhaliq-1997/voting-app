@@ -17,8 +17,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-
-        return view('ideas.index');
+        return view("ideas.index");
     }
 
     /**
@@ -50,9 +49,10 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        // dd($idea);
-        // return $idea;
-        return view('ideas.show', ['idea' => $idea, 'votesCount' => $idea->votes()->count()]);
+        return view('ideas.show', ['idea' => $idea, 
+        'votesCount' => $idea->votes()->count(),
+          'backUrl' => url()->previous() != url()->full()
+           ? url()->previous() : route('idea.index')  ]);
     }
 
     /**

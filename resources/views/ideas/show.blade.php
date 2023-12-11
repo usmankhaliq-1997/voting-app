@@ -1,16 +1,29 @@
 <x-app-layout>
     <div class="">
-        <a href="{{ route('idea.index') }}" class="flex items-center font-semibold hover:underline">
+
+
+        <a href="{{ $backUrl }}" class="flex items-center font-semibold hover:underline">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                 class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
 
-            <span class="ml-2">All Ideas</span>
+            <span class="ml-2">All Ideas ( or back to chosen catagory with filters )</span>
         </a>
     </div>
 
     @livewire('idea-show', ['idea' => $idea,'votesCount' => $votesCount])
+
+    @can('update',$idea)
+    @livewire('edit-idea',['idea' => $idea])
+    @endcan
+
+    @can('delete',$idea)
+    @livewire('delete-idea',['idea' => $idea])
+    @endcan
+
+
+
 
     <div class="comments-container relative  space-y-6 md:ml-20 my-8">
         <div class="comment-container relative  bg-white rounded-xl flex mt-4">

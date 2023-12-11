@@ -184,4 +184,66 @@ class ShowIdeasTest extends TestCase
 
         $this->assertTrue(request()->path() === 'idea/my-first-idea-2');
     }
+
+
+        /** @test */
+
+        public function back_button_after_first_visiting_index_page()
+        {
+            $user = User::factory()->create();
+            $catagoryOne = Catagory::create([
+                'name' => 'catagory 1',
+            ]);
+    
+            $statusOpen = Status::create([
+                'name' => 'Open',
+                'classes' => 'bg-gray-200'
+            ]);
+    
+    
+            $ideaOne = Idea::factory()->create([
+                    'user_id' => $user->id,
+                    'catagory_id' => $catagoryOne->id,
+                    'status_id'  => $statusOpen->id
+            ]);
+            
+            $response = $this->get('/?catagory=Catagory+1&status=Considering');
+            $response = $this->get(route('idea.show',$ideaOne));
+
+            // dd($response['backUrl']);
+
+            $this->assertStringContainsString('/?catagory=Catagory%201&status=Considering',$response['backUrl']);
+        }
+
+
+            /** @test */
+
+            public function back_button_when_show_page_visited_first()
+            {
+                $user = User::factory()->create();
+                $catagoryOne = Catagory::create([
+                    'name' => 'catagory 1',
+                ]);
+        
+                $statusOpen = Status::create([
+                    'name' => 'Open',
+                    'classes' => 'bg-gray-200'
+                ]);
+        
+        
+                $ideaOne = Idea::factory()->create([
+                        'user_id' => $user->id,
+                        'catagory_id' => $catagoryOne->id,
+                        'status_id'  => $statusOpen->id
+                ]);
+                
+                // $response = $this->get('/?catagory=Catagory+1&status=Considering');
+                $response = $this->get(route('idea.show',$ideaOne));
+    
+                // dd($response['backUrl']);
+    
+                $this->assertStringContainsString(route('idea.index'),$response['backUrl']);
+            }
+        
+    
 }
